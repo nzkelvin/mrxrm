@@ -674,6 +674,14 @@
       <DependentUpon>Sponsors.aspx</DependentUpon>
     </Compile>
     <Compile Include="Areas\CustomerManagement\Enums.cs" />
+    <Compile Include="Areas\FeedBack\Controls\FeedbackStep1.ascx.cs">
+      <DependentUpon>FeedbackStep1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\FeedBack\Controls\FeedbackStep1.ascx.designer.cs">
+      <DependentUpon>FeedbackStep1.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\FeedBack\FeedBackAreaRegistration.cs" />
     <Compile Include="Areas\Marketing\Controllers\MarketingController.cs" />
     <Compile Include="Areas\Marketing\MarketingAreaRegistration.cs" />
     <Compile Include="Areas\Parature\ParatureAreaRegistration.cs" />
@@ -1745,6 +1753,7 @@
     <Content Include="Areas\Events\Pages\ChildEvents.aspx" />
     <Content Include="Areas\Events\Pages\EventFeedback.aspx" />
     <Content Include="Areas\Events\Pages\MyEventSchedule.aspx" />
+    <Content Include="Areas\FeedBack\Controls\FeedbackStep1.ascx" />
     <Content Include="Areas\Forums\Pages\ChildForums.aspx" />
     <Content Include="Areas\Government\Pages\CitizenProfile.aspx" />
     <Content Include="Areas\Government\Pages\Home.facebook.aspx" />
@@ -3052,6 +3061,7 @@
     <Content Include="Areas\Marketing\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Marketing\Views\web.config" />
     <Content Include="Areas\Marketing\Views\Marketing\Success.cshtml" />
+    <Content Include="Areas\FeedBack\Views\web.config" />
     <None Include="AzureStartup\Startup.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -3246,6 +3256,9 @@
     <Folder Include="App_Logic\Repositories\" />
     <Folder Include="Areas\EntityList\Models\" />
     <Folder Include="Areas\EntityList\Views\Shared\" />
+    <Folder Include="Areas\FeedBack\Controllers\" />
+    <Folder Include="Areas\FeedBack\Models\" />
+    <Folder Include="Areas\FeedBack\Views\Shared\" />
     <Folder Include="Areas\Forums\Controllers\" />
     <Folder Include="Areas\KnowledgeBase\Views\Shared\" />
     <Folder Include="Areas\Marketing\Models\" />
