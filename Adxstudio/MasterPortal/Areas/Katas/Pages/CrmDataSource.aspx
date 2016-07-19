@@ -1,7 +1,9 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/MasterPages/WebFormsContent.master" AutoEventWireup="true" CodeBehind="CrmDataSource.aspx.cs" Inherits="Site.Areas.Katas.Pages.Index" %>
 <%@ OutputCache CacheProfile="User" %>
+<%@ Import Namespace="System.Data" %>
 <%@ Import namespace="Adxstudio.Xrm" %>
 <%@ Import namespace="Adxstudio.Xrm.Web.Mvc.Html" %>
+<%@ Import Namespace="Microsoft.Xrm.Sdk" %>
 
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
@@ -21,11 +23,16 @@
             </fetch>
 	    </FetchXml>
     </adx:CrmDataSource>
-    <asp:GridView ID="GridView1" runat="server" DataSourceID="AccountDataSource" AutoGenerateColumns="False" AllowSorting="True" AllowPaging="True" PageSize="5">
+    <asp:GridView ID="AccountGridView" runat="server" DataSourceID="AccountDataSource" AutoGenerateColumns="False" AllowSorting="True" AllowPaging="True" PageSize="5" OnRowDataBound="AccountGridView_RowDataBound">
 	    <Columns>
-		    <asp:BoundField DataField='name' HeaderText="Name" SortExpression="name" />
+            <asp:TemplateField HeaderText="Document Name" ItemStyle-Width="15%">
+		        <ItemTemplate>
+		            <asp:Label ID="name" runat="server" />
+		        </ItemTemplate>
+		    </asp:TemplateField>
+<%--		    <asp:BoundField DataField='name' HeaderText="Name" SortExpression="name" />
 		    <asp:BoundField DataField='address1_city' HeaderText="City" />
-		    <asp:BoundField DataField='telephone1' HeaderText="Telephone" />
+		    <asp:BoundField DataField='telephone1' HeaderText="Telephone" />--%>
 	    </Columns>
     </asp:GridView>
 </asp:Content>
