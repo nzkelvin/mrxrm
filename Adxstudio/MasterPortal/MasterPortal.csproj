@@ -682,6 +682,13 @@
       <DependentUpon>FeedbackStep1.ascx</DependentUpon>
     </Compile>
     <Compile Include="Areas\FeedBack\FeedBackAreaRegistration.cs" />
+    <Compile Include="Areas\Katas\Pages\CrmDataSource.aspx.cs">
+      <DependentUpon>CrmDataSource.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Katas\Pages\CrmDataSource.aspx.designer.cs">
+      <DependentUpon>CrmDataSource.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Marketing\Controllers\MarketingController.cs" />
     <Compile Include="Areas\Marketing\MarketingAreaRegistration.cs" />
     <Compile Include="Areas\Parature\ParatureAreaRegistration.cs" />
@@ -1759,6 +1766,7 @@
     <Content Include="Areas\Government\Pages\Home.facebook.aspx" />
     <Content Include="Areas\Ideas\Views\Shared\SiteMapPath.ascx" />
     <Content Include="Areas\Issues\Views\Shared\SiteMapPath.ascx" />
+    <Content Include="Areas\Katas\Pages\CrmDataSource.aspx" />
     <Content Include="Areas\Marketing\css\Marketing.css" />
     <Content Include="Areas\Marketing\Views\Shared\_RazorLayout.aspx" />
     <Content Include="Areas\Parature\js\case-deflection.js" />
