@@ -10,7 +10,7 @@
 namespace Site.Areas.Katas.Pages {
     
     
-    public partial class Index {
+    public partial class AccountListCrmDataSource {
         
         /// <summary>
         /// AccountDataSource control.

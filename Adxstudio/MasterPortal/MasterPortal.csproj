@@ -482,6 +482,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Logic\Repositories\AccountRepository.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="Areas\Account\Models\IdentityConfig.cs" />
@@ -682,13 +683,23 @@
       <DependentUpon>FeedbackStep1.ascx</DependentUpon>
     </Compile>
     <Compile Include="Areas\FeedBack\FeedBackAreaRegistration.cs" />
-    <Compile Include="Areas\Katas\Pages\CrmDataSource.aspx.cs">
-      <DependentUpon>CrmDataSource.aspx</DependentUpon>
+    <Compile Include="Areas\Katas\Controllers\AccountController.cs" />
+    <Compile Include="Areas\Katas\KatasAreaRegistration.cs" />
+    <Compile Include="Areas\Katas\Pages\AccountListCrmDataSource.aspx.cs">
+      <DependentUpon>AccountListCrmDataSource.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Areas\Katas\Pages\CrmDataSource.aspx.designer.cs">
-      <DependentUpon>CrmDataSource.aspx</DependentUpon>
+    <Compile Include="Areas\Katas\Pages\AccountListCrmDataSource.aspx.designer.cs">
+      <DependentUpon>AccountListCrmDataSource.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Katas\Pages\AccountListCrmEntityListView.aspx.cs">
+      <DependentUpon>AccountListCrmEntityListView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Areas\Katas\Pages\AccountListCrmEntityListView.aspx.designer.cs">
+      <DependentUpon>AccountListCrmEntityListView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Katas\ViewModels\AccountModel.cs" />
     <Compile Include="Areas\Marketing\Controllers\MarketingController.cs" />
     <Compile Include="Areas\Marketing\MarketingAreaRegistration.cs" />
     <Compile Include="Areas\Parature\ParatureAreaRegistration.cs" />
@@ -1766,7 +1777,9 @@
     <Content Include="Areas\Government\Pages\Home.facebook.aspx" />
     <Content Include="Areas\Ideas\Views\Shared\SiteMapPath.ascx" />
     <Content Include="Areas\Issues\Views\Shared\SiteMapPath.ascx" />
-    <Content Include="Areas\Katas\Pages\CrmDataSource.aspx" />
+    <Content Include="Areas\Katas\Pages\AccountListCrmDataSource.aspx" />
+    <Content Include="Areas\Katas\Pages\AccountListCrmEntityListView.aspx" />
+    <Content Include="Areas\Katas\Views\Shared\_RazorLayout.aspx" />
     <Content Include="Areas\Marketing\css\Marketing.css" />
     <Content Include="Areas\Marketing\Views\Shared\_RazorLayout.aspx" />
     <Content Include="Areas\Parature\js\case-deflection.js" />
@@ -1816,6 +1829,9 @@
     <Content Include="Areas\Setup\css\setup.css" />
     <Content Include="Areas\Setup\images\adx-weblogo-220-100-V2.png" />
     <Content Include="Areas\Setup\js\setup.js" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Controls\BlogsPanel.ascx" />
     <Content Include="Controls\EventsPanel.ascx" />
     <Content Include="Controls\ForumsPanel.ascx" />
@@ -3002,6 +3018,13 @@
     <Content Include="Pages\WebTemplate.aspx" />
     <Content Include="Pages\WebLinkNavigationPage.aspx" />
     <Content Include="Pages\WebTemplateNoMaster.aspx" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Katas\Views\Web.config" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Views\Shared\Breadcrumbs.iframe.ascx" />
     <Content Include="Views\Shared\FooterCopy.iframe.ascx" />
     <Content Include="Views\Shared\FooterMenu.iframe.ascx" />
@@ -3070,6 +3093,9 @@
     <Content Include="Areas\Marketing\Views\web.config" />
     <Content Include="Areas\Marketing\Views\Marketing\Success.cshtml" />
     <Content Include="Areas\FeedBack\Views\web.config" />
+    <Content Include="Areas\Katas\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Katas\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Katas\Views\Account\AccountListMvc.cshtml" />
     <None Include="AzureStartup\Startup.ps1">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -3185,6 +3211,8 @@
     <Content Include="js\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="js\ckeditor\skins\kama\readme.md" />
     <Content Include="js\ckeditor\skins\moono\readme.md" />
+    <Content Include="packages.config" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pages\WebForm.aspx" />
@@ -3261,7 +3289,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="App_Logic\Repositories\" />
+    <Folder Include="App_Logic\Crm\" />
     <Folder Include="Areas\EntityList\Models\" />
     <Folder Include="Areas\EntityList\Views\Shared\" />
     <Folder Include="Areas\FeedBack\Controllers\" />

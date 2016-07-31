@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/MasterPages/WebFormsContent.master" AutoEventWireup="true" CodeBehind="CrmDataSource.aspx.cs" Inherits="Site.Areas.Katas.Pages.Index" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/MasterPages/WebFormsContent.master" AutoEventWireup="true" CodeBehind="AccountListCrmDataSource.aspx.cs" Inherits="Site.Areas.Katas.Pages.AccountListCrmDataSource" %>
 <%@ OutputCache CacheProfile="User" %>
 <%@ Import Namespace="System.Data" %>
 <%@ Import namespace="Adxstudio.Xrm" %>
@@ -8,7 +8,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <adx:CrmDataSource runat="server" ID="AccountDataSource" >
-	    <FetchXml>
+<%--	    <FetchXml>
             <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
               <entity name="account">
                 <attribute name="name" />
@@ -21,11 +21,11 @@
                 </filter>
               </entity>
             </fetch>
-	    </FetchXml>
+	    </FetchXml>--%>
     </adx:CrmDataSource>
-    <asp:GridView ID="AccountGridView" runat="server" DataSourceID="AccountDataSource" AutoGenerateColumns="False" AllowSorting="True" AllowPaging="True" PageSize="5" OnRowDataBound="AccountGridView_RowDataBound">
+    <asp:GridView ID="AccountGridView" runat="server" DataSourceID="AccountDataSource" AutoGenerateColumns="False" AllowSorting="True" AllowPaging="True" PageSize="25" OnRowDataBound="AccountGridView_RowDataBound">
 	    <Columns>
-            <asp:TemplateField HeaderText="Document Name" ItemStyle-Width="15%">
+            <asp:TemplateField HeaderText="Account Name" ItemStyle-Width="15%">
 		        <ItemTemplate>
 		            <asp:Label ID="name" runat="server" />
 		        </ItemTemplate>
@@ -36,4 +36,3 @@
 	    </Columns>
     </asp:GridView>
 </asp:Content>
-
