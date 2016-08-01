@@ -13,19 +13,20 @@ Mrxrm.PhoneNumberValidation = (function () {
     return {
         OnFormLoad: function () {
             var phoneNumbers = [
-          { formattedNumber: '+64 4 5287000' },
-          { formattedNumber: '04 5287000' },
-          { formattedNumber: '5287000' },
+          { formattedNumber: '+64 6 4528700' },
+          { formattedNumber: '+64 5 28700' },
+          { formattedNumber: '06 4528700' },
+          { formattedNumber: '64528700' },
             ];
 
             var keyPressFcn = function (ext) {
                 try {
-                    var userInput = Xrm.Page.getControl("name").getValue();
+                    var userInput = Xrm.Page.getControl("telephone1").getValue();
                     resultSet = {
                         results: new Array(),
                         commands: {
                             id: "sp_commands",
-                            label: "Phone number format: +99 9 9999999",
+                            label: "",
                             action: function () {
                                 // Specify what you want to do when the user
                                 // clicks the "Learn More" link at the bottom
@@ -61,7 +62,7 @@ Mrxrm.PhoneNumberValidation = (function () {
                 }
             };
 
-            Xrm.Page.getControl("name").addOnKeyPress(keyPressFcn);    
+            Xrm.Page.getControl("telephone1").addOnKeyPress(keyPressFcn);    
         }
     };
 })();
