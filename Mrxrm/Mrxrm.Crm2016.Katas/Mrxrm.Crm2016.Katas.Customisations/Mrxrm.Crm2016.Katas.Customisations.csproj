@@ -47,6 +47,7 @@
   <ItemGroup>
     <Content Include="intellisense\Xrm.js" />
     <Content Include="scripts\Mrxrm.Account.Forms.js" />
+    <Content Include="scripts\Mrxrm.Common.Crm.js" />
     <Content Include="scripts\Mrxrm.Common.js" />
     <Content Include="Web.config" />
   </ItemGroup>
