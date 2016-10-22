@@ -16,7 +16,7 @@ namespace Mrxrm.Crm2016.WebApiConsole
         //Azure Application Client ID
         private const string _clientId = "e74b2906-67d7-4b63-b71c-8d9f33b7f0b3";
         // Azure Application REPLY URL - can be anything here but it must be registered ahead of time
-        private const string _redirectUrl = "ms-app://mrxrm.demo";
+        private const string _redirectUrl = "ms-app://mrxrm.demo"; // Makes more sense in the web context.
         //CRM URL
         private const string _serviceUrl = "https://k1605.crm6.dynamics.com/";
         //O365 used for authentication w/o login prompt
