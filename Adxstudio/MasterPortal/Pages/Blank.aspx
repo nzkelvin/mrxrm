@@ -4,4 +4,5 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 	<%: Html.HtmlAttribute("adx_copy", cssClass: "page-copy") %>
+    <adx:AdPlacement ID="BottomAd" runat="server" PlacementName="Sidebar Bottom" ShowCopy="true" />
 </asp:Content>
