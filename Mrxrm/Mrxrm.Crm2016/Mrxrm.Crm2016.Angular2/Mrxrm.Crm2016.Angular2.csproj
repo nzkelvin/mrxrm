@@ -43,6 +43,21 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\..\..\PlayCode\Web.OpenSource\Web-Angular2Cli\dist\index.html">
+      <Link>scripts\index.html</Link>
+    </Content>
+    <Content Include="..\..\..\..\PlayCode\Web.OpenSource\Web-Angular2Cli\dist\inline.0de8cd3c31d61fb07ec1.bundle.js">
+      <Link>scripts\inline.0de8cd3c31d61fb07ec1.bundle.js</Link>
+    </Content>
+    <Content Include="..\..\..\..\PlayCode\Web.OpenSource\Web-Angular2Cli\dist\main.31d7471dad035cad4bab.bundle.js">
+      <Link>scripts\main.31d7471dad035cad4bab.bundle.js</Link>
+    </Content>
+    <Content Include="..\..\..\..\PlayCode\Web.OpenSource\Web-Angular2Cli\dist\styles.d41d8cd98f00b204e980.bundle.css">
+      <Link>scripts\styles.d41d8cd98f00b204e980.bundle.css</Link>
+    </Content>
+    <Content Include="..\..\..\..\PlayCode\Web.OpenSource\Web-Angular2Cli\dist\vendor.e186f81472a86e0b6931.bundle.js">
+      <Link>scripts\vendor.e186f81472a86e0b6931.bundle.js</Link>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -56,7 +71,6 @@
   <ItemGroup>
     <Folder Include="css\" />
     <Folder Include="images\" />
-    <Folder Include="scripts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\Settings.settings">
