@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mrxrm.Crm2016.Angular2", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mrxrm.Crm2016.WebApiConsole", "Mrxrm.Crm2016.WebApiConsole\Mrxrm.Crm2016.WebApiConsole.csproj", "{DF9A5F58-C74B-4600-AC31-25B6637DD9AE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mrxrm.Crm2016.WebApiSamples.Auth", "Mrxrm.Crm2016.WebApiSamples.Auth\Mrxrm.Crm2016.WebApiSamples.Auth.csproj", "{7CF173D1-4587-4555-8881-C4D200883289}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DF9A5F58-C74B-4600-AC31-25B6637DD9AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF9A5F58-C74B-4600-AC31-25B6637DD9AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF9A5F58-C74B-4600-AC31-25B6637DD9AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CF173D1-4587-4555-8881-C4D200883289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CF173D1-4587-4555-8881-C4D200883289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CF173D1-4587-4555-8881-C4D200883289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CF173D1-4587-4555-8881-C4D200883289}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
