@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Mrxrm.D365.AzureWebJob.CurrencyUpdate
 {
@@ -22,12 +25,29 @@ namespace Mrxrm.D365.AzureWebJob.CurrencyUpdate
                 config.UseDevelopmentSettings();
             }
 
-            Console.WriteLine("Main method is called");
+            Console.WriteLine("Start Currency Update");
 
-            //// When a JobHost is running all the time, it knows when to trigger a method. e.g. When a new message arrives. But scheduler doesn't need it.
-            //var host = new JobHost();
-            //// The following code ensures that the WebJob will be running continuously
-            //host.RunAndBlock();
+            // Todo: move to a class and IoC it.
+            Dictionary<string, string> exchangeRates = Task.Run(new Func<Task<Dictionary<string, string>>>(async () =>
+            {
+                HttpClient client = new HttpClient();
+                var response = await client.GetAsync(@"https://openexchangerates.org/api/latest.json?app_id=a63ef4b679e84b29a560141286fcb7da");
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = await response.Content.ReadAsStringAsync();
+                    JObject jResult = JObject.Parse(result);
+                    var rates = JsonConvert.DeserializeObject<Dictionary<string, string>>(jResult["rates"].ToString());
+
+                    return rates;
+                }
+
+                return null;
+            })).GetAwaiter().GetResult();
+
+            foreach (var rate in exchangeRates)
+            {
+                Console.WriteLine($"{rate.Key}: {rate.Value}");
+            }
         }
     }
 }
