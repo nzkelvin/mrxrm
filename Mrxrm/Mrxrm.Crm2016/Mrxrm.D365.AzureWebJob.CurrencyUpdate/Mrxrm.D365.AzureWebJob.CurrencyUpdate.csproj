@@ -96,10 +96,10 @@
     <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\MrxrmWebJobs - Web Deploy.pubxml" />
+    <Content Include="settings.job">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Properties\webjob-publish-settings.json" />
-    <None Include="settings.job">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
