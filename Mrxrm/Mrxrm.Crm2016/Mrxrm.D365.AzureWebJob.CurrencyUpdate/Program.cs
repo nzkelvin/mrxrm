@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Ninject;
 
 namespace Mrxrm.D365.AzureWebJob.CurrencyUpdate
 {
@@ -27,22 +28,18 @@ namespace Mrxrm.D365.AzureWebJob.CurrencyUpdate
 
             Console.WriteLine("Start Currency Update");
 
-            // Todo: move to a class and IoC it.
-            Dictionary<string, string> exchangeRates = Task.Run(new Func<Task<Dictionary<string, string>>>(async () =>
-            {
-                HttpClient client = new HttpClient();
-                var response = await client.GetAsync(@"https://openexchangerates.org/api/latest.json?app_id=a63ef4b679e84b29a560141286fcb7da");
-                if (response.IsSuccessStatusCode)
-                {
-                    var result = await response.Content.ReadAsStringAsync();
-                    JObject jResult = JObject.Parse(result);
-                    var rates = JsonConvert.DeserializeObject<Dictionary<string, string>>(jResult["rates"].ToString());
+            //IoC
+            var kernel = new Ninject.StandardKernel();
+            kernel.Bind<ICurrencyExchanger>().To<CurrencyExchanger>();
 
-                    return rates;
-                }
+            Execute(kernel.Get<ICurrencyExchanger>());
 
-                return null;
-            })).GetAwaiter().GetResult();
+
+        }
+
+        public static void Execute(ICurrencyExchanger exchanger)
+        {
+            var exchangeRates = exchanger.GetExchangeRates();
 
             foreach (var rate in exchangeRates)
             {
