@@ -9,23 +9,29 @@ namespace Mrxrm.D365.AzureWebJob.CurrencyUpdate
 {
     public interface ICurrencyExchanger
     {
-        Dictionary<string, string> GetExchangeRates();
+        Dictionary<string, decimal> GetExchangeRates();
     }
 
     public class CurrencyExchanger : ICurrencyExchanger
     {
-        public Dictionary<string, string> GetExchangeRates()
+        private readonly string _exchangeApiUrl;
+
+        public CurrencyExchanger()
         {
-            Dictionary<string, string> exchangeRates = Task.Run(new Func<Task<Dictionary<string, string>>>(async () =>
+            _exchangeApiUrl = System.Configuration.ConfigurationManager.AppSettings["ExchangeApiUrl"];
+        }
+
+        public Dictionary<string, decimal> GetExchangeRates()
+        {
+            Dictionary<string, decimal> exchangeRates = Task.Run(new Func<Task<Dictionary<string, decimal>>>(async () =>
                 {
                     HttpClient client = new HttpClient();
-                    var response = await client.GetAsync(
-                        @"https://openexchangerates.org/api/latest.json?app_id=a63ef4b679e84b29a560141286fcb7da");
+                    var response = await client.GetAsync(_exchangeApiUrl);
                     if (response.IsSuccessStatusCode)
                     {
                         var result = await response.Content.ReadAsStringAsync();
                         JObject jResult = JObject.Parse(result);
-                        var rates = JsonConvert.DeserializeObject<Dictionary<string, string>>(jResult["rates"].ToString());
+                        var rates = JsonConvert.DeserializeObject<Dictionary<string, decimal>>(jResult["rates"].ToString());
 
                         return rates;
                     }
