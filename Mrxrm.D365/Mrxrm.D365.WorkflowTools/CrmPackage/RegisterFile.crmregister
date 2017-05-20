@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Register xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/crm/2011/tools/pluginregistration">
+  <Solutions>
+    <Solution Assembly="Mrxrm.D365.WorkflowTools.Mrxrm.D365.WorkflowTools.dll" Id="2b5b8edf-8a15-4b42-b82e-2b270839f452" IsolationMode="Sandbox" SourceType="Database">
+      <WorkflowTypes>
+        <clear />
+        <WorkflowType FriendlyName="Distribute One to Many" Name="DistributeWorkflowActivityOneToMany" Description="Trigger workflows on children records." WorkflowActivityGroupName="Relationship Utilities" WorkflowActivityProjectName="Mrxrm.D365.WorkflowTools" Id="00000000-0000-0000-0000-000000000000" TypeName="Mrxrm.D365.WorkflowTools.Mrxrm.D365.WorkflowTools.DistributeWorkflowActivityOneToMany" />
+      </WorkflowTypes>
+    </Solution>
+  </Solutions>
+  <XamlWorkflows>
+    <XamlWorkflowSolution Assembly="Mrxrm.D365.WorkflowTools.Mrxrm.D365.WorkflowTools.dll" />
+  </XamlWorkflows>
+</Register>
