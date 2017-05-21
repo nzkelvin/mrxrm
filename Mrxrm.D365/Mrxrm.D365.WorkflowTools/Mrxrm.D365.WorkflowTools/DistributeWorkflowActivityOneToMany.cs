@@ -22,6 +22,9 @@ using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Workflow;
 using System.Runtime.Serialization;
 using Microsoft.Xrm.Sdk.Client;
+using Microsoft.Xrm.Sdk.Messages;
+using Microsoft.Xrm.Sdk.Metadata;
+using Mrxrm.D365.WorkflowTools.Mrxrm.D365.WorkflowTools.Helpers;
 
 namespace Mrxrm.D365.WorkflowTools.Mrxrm.D365.WorkflowTools
 {
@@ -35,6 +38,14 @@ namespace Mrxrm.D365.WorkflowTools.Mrxrm.D365.WorkflowTools
         [Input("Distributed Workflow")]
         [ReferenceTarget("workflow")]
         public InArgument<EntityReference> DistributedWorkflow { get; set; }
+
+        [RequiredArgument]
+        [Input("Parent Record Url")]
+        public InArgument<string> ParentRecordUrl { get; set; }
+
+        [RequiredArgument]
+        [Input("Relationship Name")]
+        public InArgument<string> RelationshipName { get; set; }
         #endregion
 
 
@@ -62,7 +73,7 @@ namespace Mrxrm.D365.WorkflowTools.Mrxrm.D365.WorkflowTools
 
             try
             {
-                // TODO: Implement your custom activity handling.
+                // TODO: Many-to-many relationship.
                 var wfRef = DistributedWorkflow.Get<EntityReference>(executionContext);
 
                 if (wfRef == null)
@@ -71,7 +82,23 @@ namespace Mrxrm.D365.WorkflowTools.Mrxrm.D365.WorkflowTools
                     throw new NullReferenceException("Distributed Workflow");
                 }
 
-                this.Distribute(wfRef.Id, crmWorkflowContext.OrganizationService, crmWorkflowContext.TracingService);
+                // Get parent record ID
+                var parentUrl = ParentRecordUrl.Get(executionContext);
+                if (String.IsNullOrEmpty(parentUrl))
+                {
+                    throw new NullReferenceException("ParentRecordUrl");
+                }
+                var parser = new DynamicUrlParser(parentUrl);
+
+                var relationshipName = RelationshipName.Get(executionContext);
+                if (String.IsNullOrEmpty(relationshipName))
+                {
+                    throw new NullReferenceException("RelationshipName WF Input Parameter");
+                }
+
+                var keys = GetKeys(parser.Id, relationshipName, crmWorkflowContext.OrganizationService);
+
+                this.Distribute(wfRef.Id, keys, crmWorkflowContext.OrganizationService, crmWorkflowContext.TracingService);
             }
             catch (FaultException<OrganizationServiceFault> e)
             {
@@ -84,18 +111,42 @@ namespace Mrxrm.D365.WorkflowTools.Mrxrm.D365.WorkflowTools
             crmWorkflowContext.TracingService.Trace("Workflow ended");
         }
 
-        public IEnumerable<Guid> GetKeys(IOrganizationService orgService)
+        public IEnumerable<Guid> GetKeys(Guid parentId, string relationshipName, IOrganizationService orgService)
         {
-            // Get parent record ID
+            var relationshipInfo = GetRelationshipInfo(relationshipName, orgService);
 
             // Get children records
             using (var ctx = new OrganizationServiceContext(orgService))
             {
-                var childrenRecords = from r in ctx.CreateQuery("childentityname")
-                    where r["foreignKeyName"] == "parent ID"
-                    select Id;
+                var childrenRecords = from r in ctx.CreateQuery(relationshipInfo.ReferencingEntity)
+                    where r[relationshipInfo.ReferencingAttribute] == (object)parentId
+                    select r.Id;
+
+                return childrenRecords;
             }
         }
-    }
 
+        public OneToManyRelationshipMetadata GetRelationshipInfo(string relationshipName, IOrganizationService orgService)
+        {
+            if (String.IsNullOrEmpty(relationshipName))
+            {
+                throw new NullReferenceException("relationshipName");
+            }
+
+            RetrieveRelationshipRequest req = new RetrieveRelationshipRequest()
+            {
+                Name = relationshipName,
+                RetrieveAsIfPublished = false
+            };
+
+            RetrieveRelationshipResponse resp = (RetrieveRelationshipResponse) orgService.Execute(req);
+
+            if (!(resp.RelationshipMetadata is OneToManyRelationshipMetadata))
+            {
+                throw new InvalidWorkflowException($"The relationship {relationshipName} is not a one to many relationship");
+            }
+
+            return (OneToManyRelationshipMetadata) resp.RelationshipMetadata;
+        }
+    }
 }
